@@ -6,21 +6,18 @@ class User < ApplicationRecord
 
   has_many :items
 
-  validates :password, presence: true
-  validates :nick_name, presence: true
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' } do
-    validates :first_name, presence: true
-    validates :last_name, presence: true
+  with_options presence: true do
+      validates :password
+      validates :nick_name
+      validates :birthday
+    with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' } do
+      validates :first_name
+      validates :last_name
+    end
+    with_options presence: true, format: { with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, message: '全角カタカナのみで入力して下さい' } do
+      validates :first_name_kana
+      validates :last_name_kana
+    end
   end
-  with_options presence: true, format: { with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, message: '全角カタカナのみで入力して下さい' } do
-  validates :first_name_kana, presence: true
-  validates :last_name_kana, presence: true
-  end
-  validates :birthday, presence: true
 
-  # <<バリデーション>>
-  # with_options presence: true do
-  #   validates :nick_name
-  #   validates :birthday
-  # end
 end

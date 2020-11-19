@@ -31,13 +31,13 @@ RSpec.describe User, type: :model do
     it 'firstname_kanaが空では登録できないこと' do
       @user.first_name_kana = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name kana can't be blank", 'First name kana 全角文字を使用してください')
+      expect(@user.errors.full_messages).to include("First name kana can't be blank", "First name kana 全角カタカナのみで入力して下さい")
     end
 
     it 'lastname_kanaが空では登録できないこと' do
       @user.last_name_kana = ''
       @user.valid?
-      expect(@user.errors.full_messages).to include("Last name kana can't be blank", 'Last name kana 全角文字を使用してください')
+      expect(@user.errors.full_messages).to include("Last name kana can't be blank", "Last name kana 全角カタカナのみで入力して下さい")
     end
 
     it 'emailが空では登録できないこと' do
