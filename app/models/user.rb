@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   with_options presence: true do
     with_options format: { with: /(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]/, message: '半角英数字混合で入力してください' } do
-    validates :password
+      validates :password
     end
     validates :nick_name
     validates :birthday

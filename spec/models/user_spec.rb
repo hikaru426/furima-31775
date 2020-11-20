@@ -78,7 +78,6 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include('Password 半角英数字混合で入力してください')
     end
 
-
     it '重複したemailが存在する場合登録できないこと' do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)

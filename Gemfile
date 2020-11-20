@@ -70,3 +70,10 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
 end
+
+gem 'active_hash'
+
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+
+ gem 'pry-rails' 
