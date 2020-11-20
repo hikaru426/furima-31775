@@ -19,6 +19,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
 
+      it '画像がないときは登録できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      
+
       it 'infoが空では登録できないこと' do
         @item.info = ''
         @item.valid?
@@ -55,14 +62,14 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Delivery must be other than 0')
       end
 
-      it 'priceの情報がなければ登録できないこと' do
-        @item.price = ''
+      it 'priceが半角英数字出なければ登録できないこと' do
+        @item.price = "１２３４５"
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price is not included in the list", "Price Half-width number")
       end
 
       it 'priceの価格の範囲が¥300より大きいこと' do
-        @item.price = 200
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end

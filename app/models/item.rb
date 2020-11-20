@@ -9,11 +9,13 @@ class Item < ApplicationRecord
   belongs_to :prefecture
 
   has_one_attached :image
+  
 
   with_options presence: true do
     validates :name
     validates :info
     validates :price, inclusion: { in: 300..9_999_999 }
+    validates :image
   end
   with_options numericality: { other_than: 0 } do
     validates :category_id
