@@ -3,18 +3,11 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :condition
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :delivery
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :shipping
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefecture
+  
 
   has_one_attached :image
 
@@ -35,8 +28,6 @@ class Item < ApplicationRecord
     validates :prefecture_id
     validates :delivery_id
   end
+    validates :price, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
 
-  with_options format: { with: /^[0-9]+$/, message: '半角数字のみ入力してください' } do
-    :price
-  end
 end
