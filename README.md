@@ -47,7 +47,7 @@ has_one : buyer
 
 belongs_to : user
 belongs_to : item
-has_many : places
+has_one : place
 
 ## places テーブル
 
