@@ -25,7 +25,13 @@ RSpec.describe BuyerAddress, type: :model do
       expect(@buyer_address.errors.full_messages).to include('Postal code 郵便番号にはハイフンを含んでください')
     end
 
-    it '都道府県が空では登録できない' do
+    it '都道府県の選択をしてなければ登録できない' do
+      @buyer_address.prefecture_id = 0
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include("Prefecture 都道府県を選択してください")
+    end
+
+    it 'cityが空では登録できない' do
       @buyer_address.city = ''
       @buyer_address.valid?
       expect(@buyer_address.errors.full_messages).to include("City can't be blank")
@@ -43,10 +49,17 @@ RSpec.describe BuyerAddress, type: :model do
       expect(@buyer_address.errors.full_messages).to include("Phone number can't be blank")
     end
 
-    it '電話番号にはハイフンは不要で、11桁以内でなければ登録できない' do
+    it '電話番号は数字のみ出ないと（ハイフンが含まれていると）登録できない' do
       @buyer_address.phone_number = '123-12345678'
       @buyer_address.valid?
-      expect(@buyer_address.errors.full_messages).to include('Phone number 電話番号はハイフンなしの11桁以内で入力してください')
+      expect(@buyer_address.errors.full_messages).to include('Phone number 電話番号は数字のみ出ないと（ハイフンが含まれていると）登録できない')
     end
+
+    it '電話番号は11桁以内でないと登録できない' do
+      @buyer_address.phone_number = '123456789012'
+      @buyer_address.valid?
+      expect(@buyer_address.errors.full_messages).to include('Phone number 電話番号は数字のみ出ないと（ハイフンが含まれていると）登録できない')
+    end
+
   end
 end

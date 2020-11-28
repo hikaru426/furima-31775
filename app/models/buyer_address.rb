@@ -6,7 +6,7 @@ class BuyerAddress
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: '郵便番号にはハイフンを含んでください' }
     validates :city
     validates :address
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: '電話番号はハイフンなしの11桁以内で入力してください' }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: '電話番号は数字のみ出ないと（ハイフンが含まれていると）登録できない' }
     validates :token
   end
 
