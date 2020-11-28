@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
+
     it 'nicknameが空では登録できないこと' do
       @user.nick_name = ''
       @user.valid?
