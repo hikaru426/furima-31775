@@ -13,6 +13,11 @@ RSpec.describe BuyerAddress, type: :model do
       expect(@buyer_address).to be_valid
     end
 
+    it '建物名が空でも登録できる' do
+      @buyer_address.building = nil
+      expect(@buyer_address).to be_valid
+    end
+
     it '郵便番号が空では登録できない' do
       @buyer_address.postal_code = ''
       @buyer_address.valid?
